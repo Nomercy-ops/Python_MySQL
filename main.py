@@ -19,6 +19,7 @@ def menu():
     try:
         print("welcome to crud operations")
         crud = CrudOperations()
+        crud.insert_data()
     
     except Exception as e:
         logger.error(e)
