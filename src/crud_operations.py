@@ -23,8 +23,25 @@ class CrudOperations:
         self.__database = os.environ.get("database")
         self.__table_name = "student"
         self.createConnection()
+        self.createTable()
         
+   def createTable(self):
+        """
+    Description:
+        This method is used to create a table in a database.
+    Parameter:
+        It takes self as a parameter that contains connection and table name.
+       
+    """
+        try:
+            cur = self.__conn.cursor()
+            cur.execute("CREATE TABLE IF NOT EXISTS " +
+                    self.__table_name + "(id INT AUTO_INCREMENT PRIMARY KEY, name VARCHAR(255), address VARCHAR(255),phone VARCHAR(13))")
+            print("Table has been created successfully")
 
+        except Exception as e:
+            logger.error(e)
+        
     def createConnection(self):
         """
     Description:
