@@ -101,7 +101,26 @@ class CrudOperations:
         
         except Exception as e:
             logger.error(e)  
-                       
+            
+   def delete_data(self):
+        """
+    Description:
+        This method is used for deleting records from the database.
+    Parameter:
+        It takes self as a parameter that contains connection and table name.
+       
+    """
+        try:
+            id = input('Enter user id to delete Record : ')
+            cur = self.__conn.cursor()
+            cur.execute("DELETE FROM " + self.__table_name +
+                        " WHERE id = %s",(id,))
+            self.__conn.commit()
+            print(cur.rowcount,"Records Deleted successfully")
+        
+        except Exception as e:
+            logger.error(e)  
+                             
    def createConnection(self):
         """
     Description:
