@@ -42,7 +42,28 @@ class CrudOperations:
         except Exception as e:
             logger.error(e)
         
-    def createConnection(self):
+   def insert_data(self):
+        """
+    Description:
+        This method is used for inserting records into the table
+    Parameter:
+        It takes self as a parameter that contains connection and table name.
+       
+    """
+        try:
+            name = input('Enter your name: ')
+            address = input('Enter your address:')
+            phone = input('Enter your phone number:')
+            val = (name,address,phone)
+            cur = self.__conn.cursor()
+            cur.execute("INSERT INTO "+self.__table_name +" (name, address,phone) VALUES (%s, %s,%s)", val)
+            self.__conn.commit()
+            print(cur.rowcount,"Records Inserted Successfully")
+        
+        except Exception as e:
+            logger.error(e)
+            
+   def createConnection(self):
         """
     Description:
         This method is used for creating connection with the mysql database.
