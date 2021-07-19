@@ -12,10 +12,9 @@ from LoggerHandler import logger
 from dotenv import load_dotenv
 load_dotenv()
 
-
 class CrudOperations:
 
-    def __init__(self):
+   def __init__(self):
         self.__host = os.environ.get("host")
         self.__user = os.environ.get("username")
         self.__password = os.environ.get("password")
@@ -81,7 +80,28 @@ class CrudOperations:
 
         except Exception as e:
             logger.error(e)   
-                 
+   def update_data(self):
+        """
+    Description:
+        This method is used for editing and update records of the database.
+    Parameter:
+        It takes self as a parameter that contains connection and table name.
+       
+    """
+        try:
+            id = input('Search by id:')
+            name = input('Edit name:')
+            address = input('Edit Address:')
+            phone = input('Edit Phone Number:')
+            cur = self.__conn.cursor()
+            cur.execute("UPDATE " + self.__table_name +
+                        " SET name = %s,address = %s, phone = %s WHERE id = %s",(name, address, phone, id))
+            self.__conn.commit()
+            print(cur.rowcount,"Records Updated Successfully")
+        
+        except Exception as e:
+            logger.error(e)  
+                       
    def createConnection(self):
         """
     Description:
