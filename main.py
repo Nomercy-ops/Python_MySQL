@@ -20,6 +20,12 @@ def menu():
         print("welcome to crud operations")
         crud = CrudOperations()
         crud.insert_data()
+        crud.fetch_data()
+        crud.update_data()
+        crud.fetch_data()
+        crud.delete_data()
+        crud.fetch_data()
+    
     
     except Exception as e:
         logger.error(e)
