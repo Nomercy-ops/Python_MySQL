@@ -62,7 +62,26 @@ class CrudOperations:
         
         except Exception as e:
             logger.error(e)
-            
+   def fetch_data(self):
+        """
+    Description:
+        This method is used for displaying all records from the database.
+    Parameter:
+        It takes self as a parameter that contains connection and table name.
+       
+    """
+        try:
+            cur = self.__conn.cursor()
+            cur.execute("SELECT * FROM " + self.__table_name)
+            for row in cur:
+                print('Id : ', row[0])
+                print('Name : ', row[1])
+                print('Address : ', row[2])
+                print('Phone Number : ', row[3])
+
+        except Exception as e:
+            logger.error(e)   
+                 
    def createConnection(self):
         """
     Description:
