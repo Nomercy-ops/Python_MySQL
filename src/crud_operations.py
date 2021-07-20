@@ -142,6 +142,26 @@ class CrudOperations:
 
         except Exception as e:
             logger.error(e)  
+            
+    def order_by(self):
+        """
+    Description:
+        This method is used for sorting record into ascending and descending.
+    Parameter:
+        It takes self as a parameter that contains connection and table name.
+
+    """
+        try:
+            cur = self.__conn.cursor()
+            cur.execute("SELECT * FROM " + self.__table_name +
+                        " ORDER BY name ASC, Age DESC")
+            result_set = cur.fetchall()
+            for x in result_set:
+                print(x)
+
+        except Exception as e:
+            logger.error(e)
+
                              
    def createConnection(self):
         """
