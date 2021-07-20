@@ -181,6 +181,36 @@ class CrudOperations:
 
         except Exception as e:
             logger.error(e)
+            
+   def aggeregrate_function(self):
+        """
+    Description:
+        This method is used to perform calculations on multiple values 
+        and return the result in a single value like the average of all values
+    Parameter:
+        It takes self as a parameter that contains connection and table name.
+
+    """
+        try:
+            cur = self.__conn.cursor()
+            cur.execute("SELECT emp_name, SUM(working_hours) FROM " + self.__table_name + " GROUP BY emp_name")
+            result = cur.fetchall()
+            logger.info(result)
+
+            cur.execute("SELECT emp_name, MIN(working_hours) FROM " + self.__table_name + " GROUP BY emp_name")
+            result1 = cur.fetchall()
+            logger.info(result1)
+
+            cur.execute("SELECT emp_name, MAX(working_hours) FROM " + self.__table_name + " GROUP BY emp_name")
+            result3 = cur.fetchall()
+            logger.info(result3)
+
+            cur.execute("SELECT emp_name, AVG(working_hours) FROM " + self.__table_name + " GROUP BY emp_name")
+            result4 = cur.fetchall()
+            logger.info(result4)
+
+        except Exception as e:
+            logger.error(e)
                              
    def createConnection(self):
         """
