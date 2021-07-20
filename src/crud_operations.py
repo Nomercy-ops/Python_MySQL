@@ -121,7 +121,7 @@ class CrudOperations:
         except Exception as e:
             logger.error(e)
             
-    def insert_many(self):
+   def insert_many(self):
         """
     Description:
         This method is used for inserting multiple records to the database table.
@@ -143,7 +143,7 @@ class CrudOperations:
         except Exception as e:
             logger.error(e)  
             
-    def order_by(self):
+   def order_by(self):
         """
     Description:
         This method is used for sorting record into ascending and descending.
@@ -161,7 +161,26 @@ class CrudOperations:
 
         except Exception as e:
             logger.error(e)
+	
+   def group_by(self):
+        """
+    Description:
+        This method is used for collect data from multiple records
+        and group the result by one or more column
+    Parameter:
+        It takes self as a parameter that contains connection and table name.
 
+    """
+        try:
+            cur = self.__conn.cursor()
+            cur.execute("SELECT address, COUNT(*) FROM " +
+                        self.__table_name + " GROUP BY address")
+            result_set = cur.fetchall()
+            for x in result_set:
+                print(x)
+
+        except Exception as e:
+            logger.error(e)
                              
    def createConnection(self):
         """
