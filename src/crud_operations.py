@@ -119,6 +119,28 @@ class CrudOperations:
             print(cur.rowcount,"Records Deleted successfully")
         
         except Exception as e:
+            logger.error(e)
+            
+    def insert_many(self):
+        """
+    Description:
+        This method is used for inserting multiple records to the database table.
+    Parameter:
+        It takes self as a parameter that contains connection and table name.
+
+    """
+        try:
+            val = [("bikash tamang", "kurseong", "9898767634", 21),
+                   ("Rahul kharka", "banglore", "7864563345", 22),
+                   ("Akash bhutia", "siliguri", "9675465675", 18),
+                   ("Sagar sherpa", "Delhi", "9867543873", 23)]
+            cur = self.__conn.cursor()
+            cur.executemany("INSERT INTO " + self.__table_name + "(name,address,phone,Age) " +
+                            "VALUES (%s,%s,%s,%s)", val)
+            self.__conn.commit()
+            logger.info(cur.rowcount, "Multiple record inserted sucessfully..")
+
+        except Exception as e:
             logger.error(e)  
                              
    def createConnection(self):
