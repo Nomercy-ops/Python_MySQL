@@ -211,6 +211,26 @@ class CrudOperations:
 
         except Exception as e:
             logger.error(e)
+            
+   def distinct_record(self):
+        """
+    Description:
+        This method is used remove duplicate records from the table
+        and fetch only the unique records.
+    Parameter:
+        It takes self as a parameter that contains connection and table name.
+
+    """
+        try:
+            cur = self.__conn.cursor()
+            cur.execute("SELECT DISTINCT name FROM " +
+                        self.__table_name + " ORDER BY name ASC ")
+            result_set = cur.fetchall()
+            for x in result_set:
+                print(x)
+
+        except Exception as e:
+            logger.error(e)
                              
    def createConnection(self):
         """
