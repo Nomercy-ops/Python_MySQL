@@ -58,7 +58,26 @@ class MySqlViews():
             logger.info("View has been created successfully")
         
         except Exception as e:
-            logger.error(e)  
+            logger.error(e) 
+            
+    def displayView(self):
+        '''
+        Description:
+            This function is used to display currently created the view
+        Parameter:
+            it takes self as parameter.
+        '''
+
+        try:
+            cur = self.conn.cursor()
+            cur.execute("SELECT * FROM staff_details")
+            result = cur.fetchall()
+            logger.info(result)
+        
+        except Exception as e:
+            logger.error(e)
+            
+            
             
             
             
