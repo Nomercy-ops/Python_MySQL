@@ -108,3 +108,27 @@ class JoinsFunction():
         except Exception as e:
             logger.error(e)
             
+    def cross_join(self):
+        """
+    Description:
+        This method returns the Cartesian product of the sets of rows
+        from the joined table.
+
+    Parameter:
+        It takes self as a parameter.
+       
+    """
+        try:
+            cur = self.conn.cursor()
+            cur.execute(
+                "SELECT s.id,s.Staff_Name,p.Amount FROM Staff s CROSS JOIN Payment p ORDER BY s.Staff_Name ASC")
+
+            result = cur.fetchall()
+            for x in result:
+                logger.info(x)
+
+        except Exception as e:
+            logger.error(e)
+            
+            
+            
