@@ -77,7 +77,21 @@ class MySqlViews():
         except Exception as e:
             logger.error(e)
             
-            
+    def updateView(self):
+        '''
+        Description:
+            This function is used for updating  the existing view.
+        Parameter:
+            it takes self as parameter.
+        '''
+
+        try:
+            cur  = self.conn.cursor()
+            cur.execute("ALTER VIEW staff_details AS SELECT Staff_Name, Staff_Address, Monthly_Package FROM Staff")
+            logger.info("View has been Updated Successfully")
+    
+        except Exception as e:
+            logger.error(e)
             
             
             
