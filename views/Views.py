@@ -109,10 +109,22 @@ class MySqlViews():
         except Exception as e:
             logger.error(e)
             
+    def renameView(self):
+        '''
+        Description:
+            This function is used to rename the views.
+        Parameter:
+            it takes self as parameter.
+        '''
+
+        try:
+            cur  = self.conn.cursor()
+            cur.execute("RENAME TABLE staff_details TO staff")
+            logger.info("View rename successfully")
+
+        except Exception as e:
+            logger.error(e)
             
             
-            
-            
-            
-    
-    
+       
+       
