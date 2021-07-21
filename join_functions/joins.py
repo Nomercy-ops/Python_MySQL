@@ -64,5 +64,27 @@ class JoinsFunction():
         except Exception as e:
             logger.error(e)
             
+    def left_join(self):
+        """
+    Description:
+        This method returns all the values from the left table
+        and it also includes matching values from right table
+        if there are no matching join value it returns NULL.
+    Parameter:
+        It takes self as a parameter.
+       
+    """
+        try:
+            cur = self.conn.cursor()
+            cur.execute(
+                "SELECT s.id,s.Staff_Name,p.Date,p.Amount FROM Staff s LEFT JOIN Payment p ON s.id = p.Staff_id ")
+
+            result = cur.fetchall()
+            for x in result:
+                logger.info(x)
+
+        except Exception as e:
+            logger.error(e)
+            
             
     
