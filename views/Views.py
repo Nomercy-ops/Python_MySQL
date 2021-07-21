@@ -43,5 +43,24 @@ class MySqlViews():
         
         except Exception as e:
             logger.error(e)
+            
+    def createView(self):
+        '''
+        Description:
+            This function creates a view from the staff table.
+        Parameter:
+            it takes self as parameter.
+        '''
+
+        try: 
+            cur  = self.conn.cursor()
+            cur.execute("CREATE VIEW staff_details AS SELECT staff_name, staff_address, staff_Age FROM Staff")
+            logger.info("View has been created successfully")
+        
+        except Exception as e:
+            logger.error(e)  
+            
+            
+            
     
     
