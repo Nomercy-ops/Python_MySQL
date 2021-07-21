@@ -93,6 +93,25 @@ class MySqlViews():
         except Exception as e:
             logger.error(e)
             
+    def dropView(self):
+        '''
+        Description:
+            This function is used to drop the views.
+        Parameter:
+            it takes self as parameter.
+        '''
+
+        try:
+            cur  = self.conn.cursor()
+            cur.execute("DROP VIEW staff_details")
+            logger.info("View Dropped successfully")
+
+        except Exception as e:
+            logger.error(e)
+            
+            
+            
+            
             
             
     
