@@ -43,4 +43,26 @@ class JoinsFunction():
         
         except Exception as e:
             logger.error(e)
+            
+    def inner_join(self):
+        """
+    Description:
+        This method selects records that have matching values in both tables.
+    Parameter:
+        It takes self as a parameter.
+       
+    """
+        try:
+            cur = self.conn.cursor()
+            cur.execute(
+                "SELECT s.id,s.Staff_Name,s.Staff_Age,p.Amount FROM Staff s INNER JOIN Payment p ON s.id = p.Staff_id ")
+
+            result = cur.fetchall()
+            for x in result:
+                logger.info(x)
+
+        except Exception as e:
+            logger.error(e)
+            
+            
     
