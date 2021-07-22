@@ -43,6 +43,33 @@ class StoreProcedure():
         except Exception as e:
             logger.error(e)
 
+    def create_procedures(self):
+        '''
+        Description:
+            This method is used to creates Procedure without Parameter
+        Parameter:
+            it takes self as parameter.
+        '''
+
+        try:
+            cur = self.conn.cursor()
+            cur.execute('''CREATE PROCEDURE show_all_customer()
+                                    BEGIN
+                                    SELECT * FROM CUSTOMER;
+                                    END''')
+            logger.info("procedure created Successfully")
+
+            cur.execute('''CREATE PROCEDURE show_indian_customer()
+                                    BEGIN
+                                    SELECT CUST_NAME AS NAME,CUST_COUNTRY AS COUNTRY FROM CUSTOMER WHERE CUST_COUNTRY = 'India';
+                                    
+                                    END ''')
+            logger.info("procedure created Successfully")
+        except Exception as e:
+            logger.error()
+            
+            
+            
 
 
    
