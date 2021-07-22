@@ -74,10 +74,9 @@ class Index():
             logger.info("Index created successfully")
 
         except Exception as e:
-            logger.error(e)
+            logger.error(e)        
             
-            
-     def display_all_index(self):
+    def display_all_index(self):
         '''
         Description:
             This function shows all the created index.
@@ -93,8 +92,7 @@ class Index():
 
         except Exception as e:
             logger.error(e)
-            
-            
+                      
     def search_record(self):
         '''
         Description:
@@ -113,8 +111,21 @@ class Index():
         except Exception as e:
             logger.error(e)
             
-         
-         
+    def dropIndex(self):
+        '''
+        Description:
+            This function drops the index from the table.
+        Parameter:
+            it takes self as parameter.
+        '''
+
+        try:
+            cur = self.conn.cursor()
+            cur.execute("ALTER TABLE CUSTOMER DROP INDEX cust_country_idx")
+            logger.info("Index Dropped Successfully")
+
+        except Exception as e:
+            logger.error(e)
             
             
             
