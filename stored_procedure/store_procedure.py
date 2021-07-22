@@ -144,6 +144,24 @@ class StoreProcedure():
             logger.info("procedure with out parameter created successfully")
         except Exception as e:
             logger.error(e)
+            
+    def call_out_procedure(self):
+        '''
+        Description:
+            This method is used to call a stored procedure with OUT parameter
+        Parameter:
+            it takes self as parameter.
+        '''
+
+        try:
+            cur = self.conn.cursor()
+            result = cur.callproc('max_payment_amount', ['@M'])
+            logger.info(result)
+        except Exception as e:
+            logger.error(e)
+            
+            
+            
 
 
 
