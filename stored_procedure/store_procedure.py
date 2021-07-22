@@ -125,8 +125,26 @@ class StoreProcedure():
         except Exception as e:
             logger.error(e)
             
-            
-            
+    def out_parameter(self):
+        '''
+        Description:
+            This method is used for creating stored procedure
+            an calling it by passing parameter with OUT parameter.
+
+        Parameter:
+            it takes self as parameter.
+        '''
+
+        try:
+            cur = self.conn.cursor()
+            cur.execute('''CREATE PROCEDURE max_payment_amount(OUT var1 INT)
+                                    BEGIN
+                                    SELECT MAX(PAYMENT_AMT) INTO var1 FROM CUSTOMER;
+                                    END''')
+            logger.info("procedure with out parameter created successfully")
+        except Exception as e:
+            logger.error(e)
+
 
 
    
