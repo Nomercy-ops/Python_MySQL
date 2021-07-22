@@ -160,6 +160,26 @@ class StoreProcedure():
         except Exception as e:
             logger.error(e)
             
+     def with_inout_parameter(self):
+        '''
+        Description:
+            This method is used for creating stored procedure
+            an calling it by passing parameter with INOUT parameter.
+        Parameter:
+            it takes self as parameter.
+        '''
+
+        try:
+            cur = self.conn.cursor()
+            cur.execute('''CREATE PROCEDURE display_city(INOUT var1 VARCHAR(255))
+                                    BEGIN
+                                    SELECT CUST_CITY INTO var1 FROM CUSTOMER WHERE CUST_CODE = "C00017";
+                                    END''')
+            logger.info("procedure with inout parameter created successfully")
+
+        except Exception as e:
+            logger.error(e)
+            
             
             
 
