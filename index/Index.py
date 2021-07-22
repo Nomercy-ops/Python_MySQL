@@ -60,6 +60,25 @@ class Index():
         except Exception as e:
             logger.error(e)
             
+    def compositeIndex(self):
+        '''
+        Description:
+            This function create index on two or more columns of a table.
+        Parameter:
+            it takes self as parameter.
+        '''
+
+        try:
+            cur = self.conn.cursor()
+            cur.execute("CREATE INDEX cust_country_idx ON CUSTOMER(CUST_CITY,CUST_COUNTRY)")
+            logger.info("Index created successfully")
+
+        except Exception as e:
+            logger.error(e)
+            
+            
+            
+            
             
             
     
