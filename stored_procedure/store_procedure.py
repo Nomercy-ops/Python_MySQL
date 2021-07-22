@@ -89,6 +89,26 @@ class StoreProcedure():
         except Exception as e:
             logger.error(e)
             
+    def in_parameter(self):
+        '''
+        Description:
+            This method is used for creating stored procedure
+            an calling it by passing parameter with IN parameter.
+        Parameter:
+            it takes self as parameter.
+        '''
+        
+        try:
+            cur = self.conn.cursor()
+            cur.execute('''CREATE PROCEDURE limit_customer(IN var1 INT)
+                                    BEGIN
+                                    SELECT * FROM CUSTOMER LIMIT var1;  
+                                    SELECT COUNT(CUST_CODE) AS Total_Customer FROM CUSTOMER; 
+                                    END''')
+            logger.info("procedure with in parameter created successfully")
+        except Exception as e:
+            logger.error(e)
+            
             
             
 
