@@ -180,6 +180,21 @@ class StoreProcedure():
         except Exception as e:
             logger.error(e)
             
+    def call_inout_procedure(self):
+        '''
+        Description:
+            This method is used to call a stored procedure with INOUT parameter
+        Parameter:
+            it takes self as parameter.
+        '''
+
+        try:
+            cur = self.conn.cursor()
+            result = cur.callproc('display_city', ['C00017'])
+            logger.info(result)
+        except Exception as e:
+            logger.error(e)
+            
             
             
 
