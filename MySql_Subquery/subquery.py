@@ -61,4 +61,30 @@ class Subquery():
                 logger.info(x)
         except Exception as e:
             logger.error(e)
+            
+    def subquery_with_comparison_operator(self):
+        '''
+        Description:
+            This method returns the customer who has the maximum credit limit and  customer having credit limit greater than average limit..
+            it takes self as parameter.
+        '''
+
+        try:
+            cur = self.conn.cursor()
+            cur.execute(
+                '''SELECT customerNumber,customerName
+                 FROM customers WHERE creditLimit = (SELECT MAX(creditLimit) FROM customers)''')
+            result = cur.fetchall()
+            logger.info(result)
+
+            cur.execute(
+                '''SELECT customerNumber,customerName
+                 FROM customers WHERE creditLimit > (SELECT AVG(creditLimit) FROM customers)''')
+            result1 = cur.fetchall()
+            logger.info(result1)
+        except Exception as e:
+            logger.error(e)
+            
+            
+            
 
