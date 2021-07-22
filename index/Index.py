@@ -43,6 +43,25 @@ class Index():
         
         except Exception as e:
             logger.error(e)
+            
+    def singleColumnIndex(self):
+        '''
+        Description:
+            This function creates a index on a single column.
+        Parameter:
+            it takes self as parameter.
+        '''
+
+        try:
+            cur = self.conn.cursor()
+            cur.execute("CREATE INDEX cust_name_idx ON CUSTOMER(CUST_NAME)")
+            logger.info("Index created successfully")
+
+        except Exception as e:
+            logger.error(e)
+            
+            
+            
     
     
 
