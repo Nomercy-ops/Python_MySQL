@@ -95,7 +95,26 @@ class Index():
             logger.error(e)
             
             
+    def search_record(self):
+        '''
+        Description:
+            This function is used to search records from a index column.
+        Parameter:
+            it takes self as parameter. 
+        '''
+
+        try:
+            cur = self.conn.cursor()
+            cur.execute("SELECT * FROM CUSTOMER WHERE CUST_CITY = 'mumbai'")
+            result = cur.fetchall()
+            for x in result:
+                logger.info(x)
+        
+        except Exception as e:
+            logger.error(e)
             
+         
+         
             
             
             
