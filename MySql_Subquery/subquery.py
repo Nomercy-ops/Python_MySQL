@@ -103,6 +103,31 @@ class Subquery():
         except Exception as e:
             logger.error(e)
 
+     def subquery_with_exists_and_notExists(self):
+        '''
+        Description:
+            This method returns customers name and city if order details that exists and not exists.
+            it takes self as parameter.
+        '''
+
+        try:
+            cur = self.conn.cursor()
+            cur.execute(
+                '''SELECT customerName,city FROM customers C 
+                 WHERE EXISTS (SELECT * FROM orders O WHERE C.customerNumber = O.customerNumber)''')
+            result = cur.fetchall()
+            for x in result:
+                logger.info(x)
+            
+            cur.execute(
+                '''SELECT customerName,city FROM customers C 
+                 WHERE NOT EXISTS (SELECT * FROM orders O WHERE C.customerNumber = O.customerNumber)''')
+            result1 = cur.fetchall()
+            for x in result1:
+                logger.info(x)
+        except Exception as e:
+            logger.error(e)
+
 
         
             
