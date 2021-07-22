@@ -195,9 +195,22 @@ class StoreProcedure():
         except Exception as e:
             logger.error(e)
             
-            
-            
+    def drop_procedure(self):
+        '''
+        Description:
+            This function drops a procedure.
+        Parameter:
+            it takes self as parameter.
+        '''
 
-
-
-   
+        try:
+            cur = self.conn.cursor()
+            cur.execute("DROP PROCEDURE display_city")
+            cur.execute("DROP PROCEDURE limit_customer")
+            cur.execute("DROP PROCEDURE max_payment_amount")
+            cur.execute("DROP PROCEDURE show_all_customer")
+            cur.execute("DROP PROCEDURE show_indian_customer")
+            logger.info("Procedure dropped successfully")
+        except Exception as e:
+            logger.error(e)
+ 
