@@ -85,6 +85,25 @@ class Subquery():
         except Exception as e:
             logger.error(e)
             
-            
+    def subquery_with_notIn(self):
+        '''
+        Description:
+            This method returns customers who have not placed any orders 
+            it takes self as parameter.
+        '''
+
+        try:
+            cur = self.conn.cursor()
+            cur.execute(
+                '''SELECT customerName FROM customers 
+                WHERE customerNumber NOT IN (SELECT customerNumber FROM orders)''')
+            result = cur.fetchall()
+            for x in result:
+                logger.info(x)
+        except Exception as e:
+            logger.error(e)
+
+
+        
             
 
