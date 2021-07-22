@@ -77,6 +77,24 @@ class Index():
             logger.error(e)
             
             
+     def display_all_index(self):
+        '''
+        Description:
+            This function shows all the created index.
+        Parameter:
+            it takes self as parameter.
+        '''
+
+        try:
+            cur = self.conn.cursor()
+            cur.execute("SHOW INDEX FROM CUSTOMER")
+            result = cur.fetchall()
+            logger.info(result)
+
+        except Exception as e:
+            logger.error(e)
+            
+            
             
             
             
