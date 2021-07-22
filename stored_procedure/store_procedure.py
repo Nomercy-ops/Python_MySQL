@@ -109,6 +109,22 @@ class StoreProcedure():
         except Exception as e:
             logger.error(e)
             
+    def call_in_procedure(self):
+        '''
+        Description:
+            This method is used to call a stored procedure with IN parameter
+        Parameter:
+            it takes self as parameter.
+        '''
+
+        try:
+            cur = self.conn.cursor()
+            cur.callproc('limit_customer', [3, ])
+            for result in cur.stored_results():
+                logger.info(result.fetchall())
+        except Exception as e:
+            logger.error(e)
+            
             
             
 
