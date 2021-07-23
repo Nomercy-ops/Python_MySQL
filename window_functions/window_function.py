@@ -70,6 +70,19 @@ class WindowFunctions():
         except Exception as e:
             logger.info(e)
 
+    def analytical_functions_lead(self):
+        """
+        Description:
+            This method will read data from next row in given condition in query.
+        """
+        try:
+            cur = self.conn.cursor()
+            cur.execute("SELECT year, product,sale, LEAD(sale,1) OVER(ORDER BY year) AS total_sale FROM sales")
+            result = cur.fetchall()
+            logger.info(result)
+        except Exception as e:
+            logger.info(e)
+            
     
             
             
