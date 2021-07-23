@@ -17,7 +17,10 @@ def menu():
     try:
         subquery = Subquery()
         subquery.in_and_where()
-      
+        subquery.subquery_with_comparison_operator()
+        subquery.subquery_with_notIn()      
+        subquery.subquery_with_exists_and_notExists()
+        subquery.subqueries_any_all()
     except Exception as e:
         logger.error(e)
 
