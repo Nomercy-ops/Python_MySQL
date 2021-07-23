@@ -57,7 +57,22 @@ class ImportExport():
         except Exception as e:
             logger.error(e)
             
+    def export_sql_file(self,dbName,filename):
+        """
+        Description:
+            This method is used for exporting a sql file by using mysqldump.
+
+        Parameter:
+        It takes self as a parameter.
+
+        """
+        try:
+        
+            os.system('mysqldump -u{} -p{} {} > {}.sql'.format(self.username,self.password,dbName,filename))
+        except Exception as e:
+            logger.error(e) 
             
 
 
-
+            
+                
