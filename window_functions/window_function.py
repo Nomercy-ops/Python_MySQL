@@ -83,7 +83,22 @@ class WindowFunctions():
         except Exception as e:
             logger.info(e)
             
-    
+   
+    def dense_rank(self):
+        """
+        Description:
+            This method will give dense rank for given column in a condition.
+        """
+        try:
+            cur = self.conn.cursor()
+            cur.execute('''SELECT year, product,sale, dense_rank()
+             OVER(PARTITION BY year ORDER BY sale) AS 'dense_rank' FROM sales''')
+            result = cur.fetchall()
+            logger.info(result)
+        except Exception as e:
+            logger.info(e)
+            
+  
             
             
 
