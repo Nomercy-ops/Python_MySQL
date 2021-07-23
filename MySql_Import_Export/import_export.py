@@ -37,5 +37,27 @@ class ImportExport():
             self.conn = con
         except Exception as e:
             logger.error(e)
+            
+    def import_sql_file(self,new_db_name,filename):
+        """
+        Description:
+            This method is used for importing a sql file  by using mysql command.
+
+        Parameter:
+        It takes self as a parameter.
+
+        """
+        try:
+            
+            cur = self.conn.cursor()
+            cur.execute("CREATE DATABASE IF NOT EXISTS {}".format(new_db_name))
+            logger.info("Database created successfully")
+            os.system('mysql -u{} -p{} {} < {}'.format(self.username,self.password,new_db_name,filename))
+            logger.info("file imported successfully")
+        except Exception as e:
+            logger.error(e)
+            
+            
+
 
 
