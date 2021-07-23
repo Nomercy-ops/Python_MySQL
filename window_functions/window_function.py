@@ -98,7 +98,20 @@ class WindowFunctions():
         except Exception as e:
             logger.info(e)
             
-  
+    def rank(self):
+        """
+        Description:
+            This method will given ranks for specified column in given query.
+        """
+        try:
+            cur = self.conn.cursor()
+            cur.execute("SELECT year, product,sale, rank() OVER(PARTITION BY year ORDER BY sale desc) AS 'rank' FROM sales")
+            result = cur.fetchall()
+            logger.info(result)
+        except Exception as e:
+            logger.info(e)
+            
+
             
             
 
