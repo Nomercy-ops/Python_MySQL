@@ -1,0 +1,134 @@
+"""
+@Author: Rikesh Chhetri
+@Date: 2021-07-21
+@Last Modified by: Rikesh Chhetri
+@Last Modified time: 2021-07-21 10:03:30
+@Title : Program Aim is to add index to a column of a database table.
+"""
+
+import os
+import mysql.connector as connector
+from LoggerHandler import logger
+from dotenv import load_dotenv
+load_dotenv('.env')
+
+
+class Index():
+
+    def __init__(self):
+        self.host=os.getenv("DB_HOST")
+        self.user=os.getenv("DB_USER")
+        self.password =os.getenv("DB_PASSWORD")
+        self.auth_plugin=os.getenv('AUTH_PLUGIN')
+        self.database=os.getenv("DB_NAME")
+        self.createConnection()
+    
+    def createConnection(self):
+        """
+    Description:
+        This method is used for creating connection with the mysql database.
+    Parameter:
+        It takes self as a parameter that contains  cretiental details of mysql database.
+       
+    """
+        try:
+            conn = connector.connect(
+                host=self.host,
+                user=self.user,
+                passwd=self.password,
+                auth_plugin=self.auth_plugin,
+                database=self.database
+            )
+            self.conn = conn
+        
+        except Exception as e:
+            logger.error(e)
+            
+    def singleColumnIndex(self):
+        '''
+        Description:
+            This function creates a index on a single column.
+        Parameter:
+            it takes self as parameter.
+        '''
+
+        try:
+            cur = self.conn.cursor()
+            cur.execute("CREATE INDEX cust_name_idx ON CUSTOMER(CUST_NAME)")
+            logger.info("Index created successfully")
+
+        except Exception as e:
+            logger.error(e)
+            
+    def compositeIndex(self):
+        '''
+        Description:
+            This function create index on two or more columns of a table.
+        Parameter:
+            it takes self as parameter.
+        '''
+
+        try:
+            cur = self.conn.cursor()
+            cur.execute("CREATE INDEX cust_country_idx ON CUSTOMER(CUST_CITY,CUST_COUNTRY)")
+            logger.info("Index created successfully")
+
+        except Exception as e:
+            logger.error(e)        
+            
+    def display_all_index(self):
+        '''
+        Description:
+            This function shows all the created index.
+        Parameter:
+            it takes self as parameter.
+        '''
+
+        try:
+            cur = self.conn.cursor()
+            cur.execute("SHOW INDEX FROM CUSTOMER")
+            result = cur.fetchall()
+            logger.info(result)
+
+        except Exception as e:
+            logger.error(e)
+                      
+    def search_record(self):
+        '''
+        Description:
+            This function is used to search records from a index column.
+        Parameter:
+            it takes self as parameter. 
+        '''
+
+        try:
+            cur = self.conn.cursor()
+            cur.execute("SELECT * FROM CUSTOMER WHERE CUST_CITY = 'mumbai'")
+            result = cur.fetchall()
+            for x in result:
+                logger.info(x)
+        
+        except Exception as e:
+            logger.error(e)
+            
+    def dropIndex(self):
+        '''
+        Description:
+            This function drops the index from the table.
+        Parameter:
+            it takes self as parameter.
+        '''
+
+        try:
+            cur = self.conn.cursor()
+            cur.execute("ALTER TABLE CUSTOMER DROP INDEX cust_country_idx")
+            logger.info("Index Dropped Successfully")
+
+        except Exception as e:
+            logger.error(e)
+            
+            
+            
+    
+    
+
