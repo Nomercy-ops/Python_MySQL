@@ -111,6 +111,19 @@ class WindowFunctions():
         except Exception as e:
             logger.info(e)
             
+    def percent_rank(self):
+        """
+        Description:
+            This method will given percent rank for specified column in query.
+        """
+        try:
+            cur = self.conn.cursor()
+            cur.execute("SELECT year, product,sale, percent_rank() OVER(PARTITION BY product ORDER BY sale) AS 'percent_rank' FROM sales")
+            result = cur.fetchall()
+            logger.info(result)
+        except Exception as e:
+            logger.info(e)
+            
 
             
             
