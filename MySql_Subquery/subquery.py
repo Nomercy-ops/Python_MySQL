@@ -128,6 +128,32 @@ class Subquery():
         except Exception as e:
             logger.error(e)
 
+    def subqueries_any_all(self):
+        '''
+        Description:
+            This method is used with comparison operator and 
+            ANY will return TRUE when the comparison is TRUE for ANY values 
+            ALL will return TRUE when the comparison is TRUE for ALL values 
+        Parameter:
+            it takes self as parameter.
+        '''
+
+        try:
+            cur = self.conn.cursor()
+            cur.execute('''SELECT  ordernumber,orderdate FROM orders
+              WHERE orderNumber > ANY (SELECT orderNumber FROM orderdetails)''')
+            result = cur.fetchall()
+            for x in result:
+                logger.info(x)
+            
+            cur.execute('''SELECT  ordernumber,orderdate FROM orders
+              WHERE orderNumber > ALL (SELECT orderNumber FROM orderdetails)''')
+            result1 = cur.fetchall()
+            for x in result1:
+                logger.info(x)   
+        except Exception as e:
+            logger.error(e)
+
 
         
             
