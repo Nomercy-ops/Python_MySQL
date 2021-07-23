@@ -57,6 +57,18 @@ class WindowFunctions():
         except Exception as e:
             logger.info(e)
 
+    def analytical_functions_ntile(self):
+        """
+        Description:
+            This method will sort rows in given numbers in ntile() function.
+        """
+        try:
+            cur = self.conn.cursor()
+            cur.execute("SELECT year,product,sale, Ntile(3) OVER() AS total_sale FROM sales")
+            result = cur.fetchall()
+            logger.info(result)
+        except Exception as e:
+            logger.info(e)
 
     
             
