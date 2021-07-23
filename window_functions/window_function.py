@@ -44,8 +44,21 @@ class WindowFunctions():
         except Exception as e:
             logger.error(e)
             
-        
-            
+    def aggregate_function(self):
+        """
+        Description:
+            This method will give sum of sale based on given condition with window function.
+        """
+        try:
+            cur = self.conn.cursor()
+            cur.execute("SELECT year,product,sale,SUM(sale) OVER(PARTITION BY year) AS total_sale FROM sales")
+            result = cur.fetchall()
+            logger.info(result)
+        except Exception as e:
+            logger.info(e)
+
+
+    
             
             
 
